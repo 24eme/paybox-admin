@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Paybox</title>
+	<link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+	<link href="/css/bulma.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+	<nav class="nav has-shadow">
+		<div class="nav-left">
+			<a class="nav-item is-brand" href="/">
+				PayboxAdmin
+			</a>
+		</div>
+
+		<span class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+        </span>
+
+		<div class="nav-right nav-menu">
+			<a class="nav-item" href="/promo">Promos</a>
+			<a class="nav-item" href="/produit">Produits</a>
+			<a class="nav-item" href="#">Clients (soon™)</a>
+		</div>
+	</nav>
+</header>
+
+<div class="container">
+
+	<?php if (empty($paiements)): ?>
+		<article class="message is-warning">
+			<div class="message-header">
+				Attention
+			</div>
+			<div class="message-body">
+				Aucun résultat retourné.
+			</div>
+		</article>
+	<?php endif; ?>
+
+	<h1 class="title" style="margin-top: 10px">Paiements pour le groupe <?= $args['promo'] ?></h1>
+	<h2 class="subtitle">Nombre de paiements : <?= count($paiements) ?></h2>
+
+	<?php if (!isset($args['status'])): ?>
+		<article class="message is-info">
+			<div class="message-header">
+				Information
+			</div>
+			<div class="message-body">
+				Par défaut, seul les paiements effectués sont affichés.
+			</div>
+		</article>
+	<?php endif; ?>
+
+	Trier par status :
+	<div class="tabs is-toggle is-small">
+		<ul>
+			<li <?= (!isset($args['status'])) ? 'class=is-active' : '' ?>><a
+					href="<?= $router->pathFor('promo', ['promo' => $args['promo']]) ?>">ALL</a></li>
+			<?php
+			if (!empty($statuses)):
+				foreach ($statuses as $s): ?>
+					<li <?php if ($s['y_status'] == $args['status']) echo "class='is-active'" ?>>
+						<a href="<?= $router->pathFor('promo-status', ['promo' => $args['promo'], 'status' => $s['y_status']]) ?>">
+							<?= $s['y_status'] ?>
+						</a></li>
+					<?php
+				endforeach;
+			endif; ?>
+		</ul>
+	</div>
+	<p><a class="button is-primary is-outlined"
+	      href="<?= $router->pathFor('promo-status-csv', $routeArgsCsv) ?>">Export CSV</a></p>
+
+	<table class="table is-striped is-narrow is-bordered">
+		<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Prénom</th>
+			<th>Promo</th>
+			<th>Produit</th>
+			<th>Montant</th>
+			<th>Status</th>
+			<th>Date</th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($paiements as $paiement): ?>
+			<tr>
+				<td><?= $paiement['c_nom'] ?> <sup><a href="/user/<?= $paiement['c_pk'] ?>"
+				                                      title="Voir sa fiche">&para;</a></sup></td>
+				<td><?= $paiement['c_prenom'] ?></td>
+				<td><?= str_replace('_', ' ', $paiement['promo']) ?> <sup><a href="/promo/<?= $paiement['promo'] ?>"
+				                                                             title="Voir sa promo">&para;</a></sup></td>
+				<td><?= trim($paiement['p_libelle']) ?> <sup><a href="/produit/<?= $paiement['p_pk'] ?>"
+				                                                title="Voir le produit">&para;</a></sup></td>
+				<td><?= $paiement['p_montant'] ?> €</td>
+				<td><?= $paiement['y_status'] ?></td>
+				<td><?= date('d/m/Y H:m:i', strtotime($paiement['y_date'])) ?></td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

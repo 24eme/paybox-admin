@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Paybox</title>
+	<link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+	<link href="/css/bulma.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+	<nav class="nav has-shadow">
+		<div class="nav-left">
+			<a class="nav-item is-brand" href="/">
+				PayboxAdmin
+			</a>
+		</div>
+
+		<span class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+	</nav>
+</header>
+
+<section class="section">
+	<div class="container">
+		<div class="heading">
+			<h1 class="title">Liste des promos</h1>
+		</div>
+		<div class="content">
+			<ul>
+				<li><a href="/promo/all" title="Toutes les promos">Toutes les promos</a></li>
+				<?php foreach ($promos as $promo): ?>
+					<li><a href="/promo/<?= $promo['promo'] ?>"><?= str_replace('_', ' ', $promo['promo']) ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</section>
+
+</body>
+</html>

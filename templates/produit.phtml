@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Paybox</title>
+	<link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+	<link href="/css/bulma.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+	<nav class="nav has-shadow">
+		<div class="nav-left">
+			<a class="nav-item is-brand" href="/">
+				PayboxAdmin
+			</a>
+		</div>
+
+		<span class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+	</nav>
+</header>
+
+<section class="section">
+	<div class="container">
+		<?php if (isset($produit)) : ?>
+			<div class="heading">
+				<h1 class="title"><?= $produit['p_libelle'] ?></h1>
+			</div>
+			<hr/>
+			<form>
+				<label class="label">Montant en euro</label>
+				<input type="number" class="input is-disabled" placeholder="1000" value="<?= $produit['p_montant'] ?>">
+			</form>
+		<?php else: ?>
+			<div class="heading">
+				<h1 class="title">Produits disponibles</h1>
+			</div>
+			<div class="content">
+				<ul>
+					<?php foreach ($produits as $produit): ?>
+						<li><a href="/produit/<?= $produit['p_pk'] ?>"><?= $produit['p_libelle'] ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		<?php endif; ?>
+	</div>
+</section>
+
+</body>
+</html>
