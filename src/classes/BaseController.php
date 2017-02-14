@@ -12,7 +12,7 @@ class BaseController
 		$this->container = $container;
 	}
 
-	public function getNumRows(array $result)
+	public function getNumRows($result)
 	{
 		return count($result);
 	}
