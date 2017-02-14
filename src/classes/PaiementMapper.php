@@ -3,7 +3,7 @@
 
 class PaiementMapper extends Mapper
 {
-	public function getPaiements()
+	public function getPaiements($status = 'EFFECTUE')
 	{
 		$sql = "SELECT * 
 			FROM v_paiement_effectue
@@ -30,16 +30,16 @@ class PaiementMapper extends Mapper
 		return $this->getResults($stmt);
 	}
 
-	public function getPaiementsByPromo($promo)
+	public function getPaiementsByPromo($promo, $status = 'EFFECTUE')
 	{
-		$sql = "SELECT * FROM v_paiement_effectue WHERE y_status = 'EFFECTUE'
+		$sql = "SELECT * FROM v_paiement_effectue WHERE y_status = " . $this->db->quote($status) . "
 			AND promo = " . $this->db->quote($promo) . " ORDER BY y_date DESC, c_nom";
 		$stmt = $this->db->query($sql);
 
 		return $this->getResults($stmt);
 	}
 
-	public function csv($status, $promo_id)
+	public function export($status, $promo_id)
 	{
 		if (empty($status) || empty($promo_id))
 			throw new Exception('Empty status');
@@ -47,7 +47,7 @@ class PaiementMapper extends Mapper
 		$sql = "SELECT c_nom, c_prenom, promo, p_libelle, p_montant, y_status, y_date
 			FROM v_paiement_effectue
 			WHERE y_status = " . $this->db->quote($status);
-		if ($promo_id != 'all')
+		if ($promo_id !== 'all')
 			$sql .= "AND promo = " . $this->db->quote($promo_id);
 		$sql .= " ORDER BY y_date DESC, c_nom";
 		$stmt = $this->db->query($sql);

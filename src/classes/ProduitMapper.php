@@ -18,4 +18,14 @@ class ProduitMapper extends Mapper
 
 		return $this->getResults($stmt);
 	}
+
+	public function getUsers($pid)
+	{
+		$sql = "SELECT * FROM v_paiement_effectue WHERE p_pk = "
+			. $this->db->quote($pid, PDO::PARAM_INT);
+
+		$stmt = $this->db->query($sql);
+
+		return $this->getResults($stmt);
+	}
 }

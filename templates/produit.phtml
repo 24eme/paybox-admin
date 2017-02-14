@@ -9,17 +9,17 @@
 <body>
 <header>
 	<nav class="nav has-shadow">
-		<div class="nav-left">
-			<a class="nav-item is-brand" href="/">
-				PayboxAdmin
-			</a>
-		</div>
-
-		<span class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </span>
+        <div class="container">
+            <div class="nav-left">
+                <a class="nav-item is-brand" href="/">
+                    Paybox Admin
+                </a>
+            </div>
+            <div class="nav-right nav-menu">
+                <a class="nav-item" href="/produit">Produits</a>
+                <a class="nav-item" href="#">Clients (soon™)</a>
+            </div>
+        </div>
 	</nav>
 </header>
 
@@ -30,10 +30,18 @@
 				<h1 class="title"><?= $produit['p_libelle'] ?></h1>
 			</div>
 			<hr/>
-			<form>
-				<label class="label">Montant en euro</label>
-				<input type="number" class="input is-disabled" placeholder="1000" value="<?= $produit['p_montant'] ?>">
-			</form>
+            <div class="content">
+                <form>
+                    <label class="label">Montant en euro</label>
+                    <input type="number" class="input is-disabled" placeholder="1000€"
+                           value="<?= $produit['p_montant'] ?>">
+                </form>
+                <hr>
+                <p>
+                    Liste des personnes ayant payés : <a href="/produit/<?= $produit['p_pk'] ?>/users"
+                                                         class="button is-outlined is-info"></a>
+                </p>
+            </div>
 		<?php else: ?>
 			<div class="heading">
 				<h1 class="title">Produits disponibles</h1>
@@ -41,7 +49,11 @@
 			<div class="content">
 				<ul>
 					<?php foreach ($produits as $produit): ?>
-						<li><a href="/produit/<?= $produit['p_pk'] ?>"><?= $produit['p_libelle'] ?></a></li>
+                        <li>
+                            <a href="/produit/<?= $produit['p_pk'] ?>"><?= $produit['p_libelle'] ?></a>
+                            » <a href="/produit/<?= $produit['p_pk'] ?>/users"
+                                 class="button is-outlined is-info">Payés</a>
+                        </li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
