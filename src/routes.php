@@ -14,7 +14,7 @@ $app->group('/promo', function() {
 */
 
 $app->group('/produit', function () {
-	$this->get('/', ProductController::class . ':getAll')->setName('produit');
+	$this->get('', ProductController::class . ':getAll')->setName('produit');
 	$this->post('/new', ProductController::class . ':createProduct')->setName('create-produit');
 	$this->get('/{id:[0-9]+}', ProductController::class . ':getProduct')->setName('produit-id');
 	$this->post('/{id:[0-9]+}/edit', ProductController::class . ':updateProduct')->setName('set-produit-id');
