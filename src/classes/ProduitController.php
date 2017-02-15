@@ -18,6 +18,7 @@ class ProduitController extends BaseController
 
 		if ($produit === false) {
 			parent::throw404($request, $response, 'No product found.');
+			exit();
 		}
 
 		return $this->container->get('renderer')->render($response, 'produit.phtml', ['produit' => $produit]);

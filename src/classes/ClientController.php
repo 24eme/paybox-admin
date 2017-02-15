@@ -9,6 +9,11 @@ class ClientController extends BaseController
 		$client = $mapper->getClient($args['id']);
 		$histo = $mapper->getClientHisto($args['id']);
 
+		if ($client === false) {
+			parent::throw404($request, 'No client found.');
+			exit();
+		}
+
 		return $this->container->get('renderer')->render($response, 'client.phtml', ['client' => $client, 'histo' => $histo]);
 	}
 }
