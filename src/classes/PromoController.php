@@ -5,7 +5,7 @@ class PromoController extends BaseController
 {
 	public function getAll($request, $response, $args)
 	{
-		$mapper = new PaiementMapper($this->container->get('database'));
+		$mapper = new PaiementMapper($this->container->get('database'), $this->container->get('logger'));
 		$promos = $mapper->getPromos();
 
 		return $this->container->get('renderer')->render($response, 'promo.phtml', ['promos' => $promos]);
@@ -16,7 +16,7 @@ class PromoController extends BaseController
 		$status = (!empty($args['status'])) ? $args['status'] : 'EFFECTUE';
 		$promo_id = $args['promo'];
 
-		$mapper = new PaiementMapper($this->container->get('database'));
+		$mapper = new PaiementMapper($this->container->get('database'), $this->container->get('logger'));
 
 		if ($promo_id == 'all') {
 			$paiements = $mapper->getPaiements($status);
@@ -51,7 +51,7 @@ class PromoController extends BaseController
 
 		$promo = $args['promo'];
 
-		$mapper = new PaiementMapper($this->container->get('database'));
+		$mapper = new PaiementMapper($this->container->get('database'), $this->container->get('logger'));
 		$paiements = $mapper->export($status, $promo);
 
 		$response = $response->withHeader('Content-Type', 'text/csv; charset=utf-8');

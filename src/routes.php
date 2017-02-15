@@ -13,18 +13,19 @@ $app->group('/promo', function() {
 });
 */
 
-$app->get('/produit', ProductController::class . ':getAll')->setName('produit');
+$app->get('/produit', ProduitController::class . ':getAll')->setName('produit');
 $app->get('/produit/', function ($request, $response, $args) {
 	return $response->withStatus(302)->withHeader('Location', '/produit');
 });
-$app->post('/produit/new', ProductController::class . ':createProduct')->setName('create-produit');
+$app->post('/produit/new', ProduitController::class . ':createProduct')->setName('create-produit');
 
 $app->group('/produit/{id:[0-9]+}', function () {
-	$this->get('', ProductController::class . ':getProduct')->setName('produit-id');
-	$this->post('/edit', ProductController::class . ':updateProduct')->setName('set-produit-id');
-	$this->get('/users', ProductController::class . ':getUsers')->setName('users-produit-id');
+	$this->get('', ProduitController::class . ':getProduct')->setName('produit-id');
+	$this->post('/edit', ProduitController::class . ':updateProduct')->setName('set-produit-id');
+	$this->get('/users', ProduitController::class . ':getPaiements')->setName('paiements');
+	$this->get('/users/export', ProduitController::class . ':export')->setName('paiements');
 });
 
-$app->get('/user/{id:[0-9]+}', UserController::class . ':getUser')->setName('user-id');
+$app->get('/user/{id:[0-9]+}', ClientController::class . ':getUser')->setName('user-id');
 
 $app->get('/log', AdminController::class . ':log')->setName('log');

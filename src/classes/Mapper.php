@@ -1,18 +1,25 @@
 <?php
 
 
+use Monolog\Logger;
+
 abstract class Mapper
 {
 	/** @var $db PDO */
 	protected $db;
 
+	/** @var  $logger */
+	protected $logger;
+
 	/**
 	 * Mapper constructor.
 	 * @param $db
+	 * @param $logger
 	 */
-	public function __construct($db)
+	public function __construct($db, Logger $logger)
 	{
 		$this->db = $db;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -26,5 +33,10 @@ abstract class Mapper
 			$results[] = $row;
 		}
 		return $results;
+	}
+
+	public function logError($message, $status = 'info')
+	{
+		$this->logger->$status($message);
 	}
 }

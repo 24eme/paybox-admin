@@ -3,17 +3,23 @@
 
 class PaiementMapper extends Mapper
 {
-	public function getPaiements($status = 'EFFECTUE')
+	public function getPaiements($produit = null, $status = 'EFFECTUE')
 	{
-		$sql = "SELECT * 
-			FROM v_paiement_effectue
-			WHERE y_status = 'EFFECTUE'
-			ORDER BY y_date DESC, c_nom";
+		$WHERE = 'WHERE y_status = ' . $this->db->quote($status);
+
+		if ($produit !== null) {
+			$WHERE .= ' AND p_pk = ' . $this->db->quote($produit, PDO::PARAM_INT);
+		}
+
+		$sql = "SELECT * FROM v_paiement_effectue "
+			. $WHERE
+			. " ORDER BY y_date DESC, c_nom";
 		$stmt = $this->db->query($sql);
 
 		return $this->getResults($stmt);
 	}
 
+	/*
 	public function getPaiementsByStatus($status, $promo_id)
 	{
 		if (empty($status) || empty($promo_id))
@@ -38,6 +44,7 @@ class PaiementMapper extends Mapper
 
 		return $this->getResults($stmt);
 	}
+	*/
 
 	public function export($status, $promo_id)
 	{
