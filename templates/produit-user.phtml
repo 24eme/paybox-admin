@@ -25,6 +25,8 @@
 
 <div class="container">
 
+    <h2 class="subtitle">Nombre de paiements : <?= count($users) ?></h2>
+
 	<?php if (empty($users)): ?>
         <article class="message is-warning">
             <div class="message-header">
@@ -35,8 +37,6 @@
             </div>
         </article>
 	<?php endif; ?>
-
-    <h2 class="subtitle">Nombre de paiements : <?= count($users) ?></h2>
 
 	<?php if (!isset($args['status'])): ?>
         <article class="message is-info">
@@ -49,29 +49,25 @@
         </article>
 	<?php endif; ?>
 
-    <!--	Trier par status :-->
-    <!--	<div class="tabs is-toggle is-small">-->
-    <!--		<ul>-->
-    <!--			<li --><? //= (!isset($args['status'])) ? 'class=is-active' : '' ?><!-->
-    <a-->
-        <!--					href="-->
-		<? //= $router->pathFor('promo', ['promo' => $args['promo']]) ?><!--">ALL</a></li>-->
-        <!--			--><?php
-		//			if (!empty($statuses)):
-		//				foreach ($statuses as $s): ?>
-        <!--					<li --><?php //if ($s['y_status'] == $args['status']) echo "class='is-active'" ?><!-->
-        -->
-        <!--						<a href="-->
-		<? //= $router->pathFor('promo-status', ['promo' => $args['promo'], 'status' => $s['y_status']]) ?><!--">-->
-        <!--							--><? //= $s['y_status'] ?>
-        <!--						</a></li>-->
-        <!--					--><?php
-		//				endforeach;
-		//			endif; ?>
-        <!--		</ul>-->
-        <!--	</div>-->
-        <!--	<p><a class="button is-primary is-outlined"-->
-        <!--	      href="--><? //= $router->pathFor('promo-status-csv', $routeArgsCsv) ?><!--">Export CSV</a></p>-->
+    Trier par status :
+    <div class="tabs is-toggle is-small">
+        <ul>
+            <li <?= (!isset($args['status'])) ? 'class=is-active' : '' ?>>
+                <a href="#">All</a>
+            </li>
+			<?php
+			if (!empty($statuses)):
+				foreach ($statuses as $s): ?>
+                    <li <?php if ($s['y_status'] === $args['status']) echo "class='is-active'" ?>>
+                        <a href="?status=<?= $s['y_status'] ?>">
+							<?= strtolower($s['y_status']) ?>
+                        </a>
+                    </li>
+				<?php endforeach;
+			endif; ?>
+        </ul>
+    </div>
+    <p><a class="button is-primary is-outlined" href="#">Export CSV</a></p>
 
         <table class="table is-striped is-narrow is-bordered">
             <thead>
@@ -89,11 +85,6 @@
                     <td><?= $paiement['c_nom'] ?> <sup><a href="/user/<?= $paiement['c_pk'] ?>"
                                                           title="Voir sa fiche">&para;</a></sup></td>
                     <td><?= $paiement['c_prenom'] ?></td>
-                    <td><?= str_replace('_', ' ', $paiement['promo']) ?> <sup><a href="/promo/<?= $paiement['promo'] ?>"
-                                                                                 title="Voir sa promo">&para;</a></sup>
-                    </td>
-                    <td><?= trim($paiement['p_libelle']) ?> <sup><a href="/produit/<?= $paiement['p_pk'] ?>"
-                                                                    title="Voir le produit">&para;</a></sup></td>
                     <td><?= $paiement['p_montant'] ?> €</td>
                     <td><?= $paiement['y_status'] ?></td>
                     <td><?= date('d/m/Y H:m:i', strtotime($paiement['y_date'])) ?></td>
