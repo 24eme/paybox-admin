@@ -33,11 +33,18 @@
             <div class="content">
                 <form>
                     <label class="label">Montant en euro</label>
-                    <input type="number" class="input is-disabled" placeholder="1000€"
-                           value="<?= $produit['p_montant'] ?>">
-                    <label class="label">Disponible</label>
-                    <input type="checkbox" <?php echo ($produit['p_open']) ? 'checked' : '' ?>
-                           class="input is-disabled">
+                    <p class="control">
+                        <input type="number" class="input is-disabled" placeholder="1000€"
+                               value="<?= $produit['p_montant'] ?>">
+                    </p>
+                    <p class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" <?php echo ($produit['p_open']) ? 'checked' : '' ?>
+                                   class="checkbox is-disabled">
+                            Disponible ?
+                        </label>
+                    </p>
+
                 </form>
                 <hr>
                 <p>
