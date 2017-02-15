@@ -3,7 +3,7 @@
 
 use Interop\Container\ContainerInterface;
 
-class BaseController
+abstract class BaseController
 {
 	protected $container;
 
@@ -12,7 +12,7 @@ class BaseController
 		$this->container = $container;
 	}
 
-	public function getNumRows($result)
+	public function getNumRows(array $result)
 	{
 		return count($result);
 	}
