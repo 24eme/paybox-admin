@@ -35,11 +35,14 @@
                     <label class="label">Montant en euro</label>
                     <input type="number" class="input is-disabled" placeholder="1000€"
                            value="<?= $produit['p_montant'] ?>">
+                    <label class="label">Disponible</label>
+                    <input type="checkbox" <?php echo ($produit['p_open']) ? 'checked' : '' ?>
+                           class="input is-disabled">
                 </form>
                 <hr>
                 <p>
-                    Liste des personnes ayant payés : <a href="/produit/<?= $produit['p_pk'] ?>/users"
-                                                         class="button is-outlined is-info"></a>
+                    Liste des personnes ayant payés » <a href="/produit/<?= $produit['p_pk'] ?>/users"
+                                                         class="button is-outlined is-small is-link is-info">Voir</a>
                 </p>
             </div>
 		<?php else: ?>
@@ -52,7 +55,7 @@
                         <li>
                             <a href="/produit/<?= $produit['p_pk'] ?>"><?= $produit['p_libelle'] ?></a>
                             » <a href="/produit/<?= $produit['p_pk'] ?>/users"
-                                 class="button is-outlined is-info">Payés</a>
+                                 class="button is-outlined is-small is-link is-info">Voir</a>
                         </li>
 					<?php endforeach; ?>
 				</ul>
