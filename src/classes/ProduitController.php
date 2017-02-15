@@ -17,8 +17,7 @@ class ProduitController extends BaseController
 		$produit = $mapper->getProduit($args['id']);
 
 		if ($produit === false) {
-			parent::throw404($request, $response, 'No product found.');
-			exit();
+			return parent::throw404($request, $response, 'No product found.');
 		}
 
 		return $this->container->get('renderer')->render($response, 'produit.phtml', ['produit' => $produit]);
