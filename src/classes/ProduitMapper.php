@@ -19,6 +19,7 @@ class ProduitMapper extends Mapper
 				. PHP_EOL
 				. print_r($this->db->errorInfo(), true),
 				'alert');
+			return false;
 		}
 	}
 
