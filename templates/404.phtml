@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>404 - Paybox</title>
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <link href="/css/bulma.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<section class="hero is-medium is-danger is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                404
+            </h1>
+            <h2 class="subtitle">
+				<?php if (isset($message)):
+					echo $message;
+				endif; ?>
+            </h2>
+        </div>
+    </div>
+</section>
+</body>
+</html>
