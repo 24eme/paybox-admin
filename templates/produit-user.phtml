@@ -24,7 +24,7 @@
 </header>
 
 <div class="container">
-
+    <section class="section">
     <h2 class="subtitle">Nombre de paiements : <?= count($users) ?></h2>
 
 	<?php if (empty($users)): ?>
@@ -52,22 +52,23 @@
     Trier par status :
     <div class="tabs is-toggle is-small">
         <ul>
-            <li <?= (!isset($args['status'])) ? 'class=is-active' : '' ?>>
+            <li <?= (!isset($status)) ? 'class=is-active' : '' ?>>
                 <a href="#">All</a>
             </li>
 			<?php
 			if (!empty($statuses)):
 				foreach ($statuses as $s): ?>
-                    <li <?php if ($s['y_status'] === $args['status']) echo "class='is-active'" ?>>
+                    <li <?php if ($s['y_status'] === $status) echo "class='is-active'" ?>>
                         <a href="?status=<?= $s['y_status'] ?>">
-							<?= strtolower($s['y_status']) ?>
+	                        <?= ucfirst($s['y_status']) ?>
                         </a>
                     </li>
 				<?php endforeach;
 			endif; ?>
         </ul>
     </div>
-    <p><a class="button is-primary is-outlined" href="#">Export CSV</a></p>
+        <p><a class="button is-primary is-outlined" href="<?= $router->pathFor('export') ?>?status=<?= $status ?> ">Export
+                CSV</a></p>
 
         <table class="table is-striped is-narrow is-bordered">
             <thead>
@@ -92,6 +93,7 @@
 			<?php endforeach; ?>
             </tbody>
         </table>
+    </section>
 </div>
 </body>
 </html>

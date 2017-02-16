@@ -23,7 +23,7 @@ $app->group('/produit/{id:[0-9]+}', function () {
 	$this->get('', ProduitController::class . ':getProduct')->setName('produit-id');
 	$this->post('/edit', ProduitController::class . ':updateProduct')->setName('set-produit-id');
 	$this->get('/users', ProduitController::class . ':getPaiements')->setName('paiements');
-	$this->get('/users/export', ProduitController::class . ':export')->setName('paiements');
+	$this->get('/users/export', ProduitController::class . ':export')->setName('export');
 });
 
 $app->get('/user/{id:[0-9]+}', ClientController::class . ':getUser')->setName('user-id');

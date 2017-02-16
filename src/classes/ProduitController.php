@@ -29,6 +29,7 @@ class ProduitController extends BaseController
 
 		$mapper = new PaiementMapper($this->container->get('database'), $this->container->get('logger'));
 		$users = $mapper->getPaiements($args['id'], $status);
+		$statuses = $mapper->getStatuses();
 
 		if ($request->isXhr()) {
 			$data = [
@@ -40,8 +41,10 @@ class ProduitController extends BaseController
 			return $response->withJson($data);
 		} else {
 			$returnedData = [
+				'router' => $this->container->get('router'),
 				'produit' => $args['id'],
 				'status' => $status,
+				'statuses' => $statuses,
 				'users' => $users
 			];
 			return $this->container->get('renderer')->render($response, 'produit-user.phtml', $returnedData);
