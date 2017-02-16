@@ -46,17 +46,13 @@ class PaiementMapper extends Mapper
 	}
 	*/
 
-	public function export($status, $promo_id)
+	public function export($produit, $status = 'EFFECTUE')
 	{
-		if (empty($status) || empty($promo_id))
-			throw new Exception('Empty status');
-
-		$sql = "SELECT c_nom, c_prenom, promo, p_libelle, p_montant, y_status, y_date
+		$sql = "SELECT c_nom, c_prenom, p_libelle, p_montant, y_status, y_date
 			FROM v_paiement_effectue
-			WHERE y_status = " . $this->db->quote($status);
-		if ($promo_id !== 'all')
-			$sql .= "AND promo = " . $this->db->quote($promo_id);
-		$sql .= " ORDER BY y_date DESC, c_nom";
+			WHERE y_status = " . $this->db->quote($status)
+			. " AND p_pk = " . $this->db->quote($produit, PDO::PARAM_INT)
+			. " ORDER BY y_date DESC, c_nom";
 		$stmt = $this->db->query($sql);
 
 		return $this->getResults($stmt);

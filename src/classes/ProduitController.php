@@ -66,17 +66,17 @@ class ProduitController extends BaseController
 		$format = $request->getQueryParam('format', 'csv');
 		$status = $request->getQueryParam('status', 'EFFECTUE');
 
-		$promo = $args['promo'];
+		//$promo = $args['promo'];
 
 		$mapper = new PaiementMapper($this->container->get('database'), $this->container->get('logger'));
-		$paiements = $mapper->export($status, $promo);
+		$paiements = $mapper->export($args['id'], $status);
 
 		$response = $response->withHeader('Content-Type', 'text/csv; charset=utf-8');
 		$response = $response->withHeader('Content-Disposition',
-			'attachment; filename=' . $promo . '-' . $status . '-' . date('Y-m-d') . '.csv');
+			'attachment; filename=' . $args['id'] . '-' . $status . '-' . date('Y-m-d') . '.csv');
 
 		$output = fopen('php://output', 'w');
-		$csvheader = ['nom', 'prenom', 'promo', 'libelleproduit', 'montant', 'status', 'date'];
+		$csvheader = ['nom', 'prenom', 'libelleproduit', 'montant', 'status', 'date'];
 		fputcsv($output, $csvheader, ';');
 
 		foreach ($paiements as $paiement) {
