@@ -67,7 +67,8 @@
 			endif; ?>
         </ul>
     </div>
-        <p><a class="button is-primary is-outlined" href="<?= $router->pathFor('export') ?>?status=<?= $status ?> ">Export
+        <p><a class="button is-primary is-outlined"
+              href="<?= $router->pathFor('export', ['id' => $produit]) ?>?status=<?= $status ?> ">Export
                 CSV</a></p>
 
         <table class="table is-striped is-narrow is-bordered">
