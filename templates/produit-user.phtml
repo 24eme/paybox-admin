@@ -92,7 +92,7 @@
                            title="Envoyer un e-mail"><?= $paiement['c_email'] ?></a></td>
                     <td><?= $paiement['p_montant'] ?> €</td>
                     <td><?= $paiement['y_status'] ?></td>
-                    <td><?= date('d/m/Y H:m:i', strtotime($paiement['y_date'])) ?></td>
+                    <td><?= date('d/m/Y H:i:s', strtotime($paiement['y_date'])) ?></td>
                 </tr>
 			<?php endforeach; ?>
             </tbody>
