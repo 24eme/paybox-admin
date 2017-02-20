@@ -88,7 +88,8 @@
                     <td><?= $paiement['c_nom'] ?> <sup><a href="/user/<?= $paiement['c_pk'] ?>"
                                                           title="Voir sa fiche">&para;</a></sup></td>
                     <td><?= $paiement['c_prenom'] ?></td>
-                    <td><?= $paiement['c_email'] ?></td>
+                    <td><a href="mailto:<?= $paiement['c_email'] ?>"
+                           title="Envoyer un e-mail"><?= $paiement['c_email'] ?></a></td>
                     <td><?= $paiement['p_montant'] ?> €</td>
                     <td><?= $paiement['y_status'] ?></td>
                     <td><?= date('d/m/Y H:m:i', strtotime($paiement['y_date'])) ?></td>
