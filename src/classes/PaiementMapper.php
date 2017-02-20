@@ -48,7 +48,7 @@ class PaiementMapper extends Mapper
 
 	public function export($produit, $status = 'EFFECTUE')
 	{
-		$sql = "SELECT c_nom, c_prenom, p_libelle, p_montant, y_status, y_date
+		$sql = "SELECT c_nom, c_prenom, c_email, p_libelle, p_montant, y_status, y_date
 			FROM v_paiement_effectue
 			WHERE y_status = " . $this->db->quote($status)
 			. " AND p_pk = " . $this->db->quote($produit, PDO::PARAM_INT)
