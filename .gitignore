@@ -2,5 +2,4 @@
 /logs/*
 !/logs/README.md
 .idea/
-src/settings.php
 .env
