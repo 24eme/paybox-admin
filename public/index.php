@@ -1,4 +1,6 @@
 <?php
+use Dotenv\Dotenv;
+
 if (PHP_SAPI == 'cli-server') {
 	// To help the built-in PHP dev server, check if the request was actually for
 	// something which should probably be served as a static file
@@ -16,6 +18,10 @@ spl_autoload_register(function ($classname) {
 });
 
 session_start();
+
+// Load Env variables
+$dotenv = new Dotenv(__DIR__.'/../');
+$dotenv->load();
 
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';
