@@ -7,6 +7,6 @@ use Tuupola\Middleware\HttpBasicAuthentication;
 
 $app->add(new HttpBasicAuthentication([
 	"users" => [
-		"administrator" => getenv("ADMIN_PASSWORD")
+		getenv("ADMIN_USER") => getenv("ADMIN_PASSWORD")
 	]
 ]));
