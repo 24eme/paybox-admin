@@ -2,19 +2,19 @@
 use Dotenv\Dotenv;
 
 if (PHP_SAPI == 'cli-server') {
-	// To help the built-in PHP dev server, check if the request was actually for
-	// something which should probably be served as a static file
-	$url = parse_url($_SERVER['REQUEST_URI']);
-	$file = __DIR__ . $url['path'];
-	if (is_file($file)) {
-		return false;
-	}
+    // To help the built-in PHP dev server, check if the request was actually for
+    // something which should probably be served as a static file
+    $url = parse_url($_SERVER['REQUEST_URI']);
+    $file = __DIR__ . $url['path'];
+    if (is_file($file)) {
+        return false;
+    }
 }
 
 // Auto loader
 require __DIR__ . '/../vendor/autoload.php';
 spl_autoload_register(function ($classname) {
-	require("../src/classes/" . $classname . ".php");
+    require("../src/classes/" . $classname . ".php");
 });
 
 session_start();
