@@ -145,7 +145,7 @@ class ProduitController extends BaseController
             'attachment; filename=' . $args['id'] . '-' . $status . '-' . date('Y-m-d') . '.csv');
 
         $output = fopen('php://output', 'w');
-        $csvheader = ['nom', 'prenom', 'email', 'libelleproduit', 'montant', 'status', 'date'];
+        $csvheader = ['nom', 'prenom', 'email', 'libelleproduit', 'montant', 'status', 'date', 'reference'];
         fputcsv($output, $csvheader, ';');
 
         foreach ($paiements as $paiement) {
