@@ -46,3 +46,14 @@ $container['flash'] = function ($c) {
 $container['assert'] = function ($c) {
     return Assert\Assert::lazy();
 };
+
+// 404
+unset($container['notFoundHandler']);
+$container['notFoundHandler'] = function ($c) {
+    return function ($request, $response) use ($c) {
+        $response = new \Slim\Http\Response(404);
+        return $response->write(
+            file_get_contents($c->get('settings')['renderer']['template_path'].'404.phtml')
+        );
+    };
+};
