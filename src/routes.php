@@ -31,5 +31,3 @@ $app->group('/produit/{id:[0-9]+}', function () {
 $app->get('/user/{id:[0-9]+}', ClientController::class . ':getUser')->setName('user-id');
 
 $app->get('/ref/{reference}', ReferenceController::class . ':getReference')->setName('reference');
-
-$app->get('/log', AdminController::class . ':log')->setName('log');
