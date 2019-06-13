@@ -1,80 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Paybox</title>
-    <link href="/css/bulma.min.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<header>
-    <nav class="nav has-shadow">
-        <div class="container">
-            <div class="nav-left">
-                <a class="nav-item is-brand" href="/">
-                    Paybox Admin
-                </a>
-            </div>
-            <div class="nav-right nav-menu">
-                <a class="nav-item" href="/produit">Produits</a>
-                <a class="nav-item" href="#">Clients (soon™)</a>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<section class="section">
-    <div class="container">
-        <div class="heading">
-            <h1 class="title"><?= $client['c_prenom'] . " " . $client['c_nom'] ?></h1>
-            <h2 class="subtitle">#&nbsp;<?= $client['c_identifiant'] ?></h2>
-        </div>
-        <hr/>
-        <div class="columns">
-            <div class="column is-one-quarter">
-                <div class="content">
-                    <h3>Informations :</h3>
-                    <p>
-                        @:&nbsp;<a href="mailto:<?= $client['c_email'] ?>"><?= $client['c_email'] ?></a>
-                    </p>
-                </div>
-            </div>
-            <div class="column">
-                <div class="content">
-                    <h3>Historique :</h3>
-                    <table class="table is-narrow">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Produit</th>
-                            <th>Status</th>
-                            <th>Référence</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        if (empty($histo)):
-                            echo '<tr><td colspan="3">Aucun historique</td></tr>';
-                        else:
-                            foreach ($histo as $h):
-                                ?>
-                                <tr>
-                                    <td><?= date('d/m/Y', strtotime($h['y_date'])) ?></td>
-                                    <td><?= $h['p_libelle'] ?></td>
-                                    <td><?= $h['y_status'] ?></td>
-                                    <td><?= $h['y_reference'] ?> <sup><a href="/ref/<?= $h['y_reference'] ?>"
-                                        title="Voir la fiche référence">&para;</a></sup></td>
-                                </tr>
-                                <?php
-                            endforeach;
-                        endif;
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<div class="heading">
+    <h1 class="title"><?= $client['c_prenom'] . " " . $client['c_nom'] ?></h1>
+    <h2 class="subtitle">#&nbsp;<?= $client['c_identifiant'] ?></h2>
+</div>
+<hr/>
+<div class="columns">
+    <div class="column is-one-quarter">
+	<div class="content">
+	    <h3>Informations :</h3>
+	    <p>
+		@:&nbsp;<a href="mailto:<?= $client['c_email'] ?>"><?= $client['c_email'] ?></a>
+	    </p>
+	</div>
     </div>
-</section>
-
-</body>
-</html>
+    <div class="column">
+	<div class="content">
+	    <h3>Historique :</h3>
+	    <table class="table is-narrow">
+		<thead>
+		<tr>
+		    <th>Date</th>
+		    <th>Produit</th>
+		    <th>Status</th>
+		    <th>Référence</th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php
+		if (empty($histo)):
+		    echo '<tr><td colspan="3">Aucun historique</td></tr>';
+		else:
+		    foreach ($histo as $h):
+			?>
+			<tr>
+			    <td><?= date('d/m/Y', strtotime($h['y_date'])) ?></td>
+			    <td><?= $h['p_libelle'] ?></td>
+			    <td><?= $h['y_status'] ?></td>
+			    <td><?= $h['y_reference'] ?> <sup><a href="/ref/<?= $h['y_reference'] ?>"
+				title="Voir la fiche référence">&para;</a></sup></td>
+			</tr>
+			<?php
+		    endforeach;
+		endif;
+		?>
+		</tbody>
+	    </table>
+	</div>
+    </div>
+</div>
