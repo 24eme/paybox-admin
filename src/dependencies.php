@@ -52,8 +52,10 @@ unset($container['notFoundHandler']);
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         $response = new \Slim\Http\Response(404);
-        return $response->write(
-            file_get_contents($c->get('settings')['renderer']['template_path'].'404.phtml')
-        );
+        $file = $c->get('settings')['renderer']['template_path'].'404.phtml';
+
+        $body = str_replace('%%MESSAGE%%', $request->getAttribute('404Message'), file_get_contents($file));
+
+        return $response->write($body);
     };
 };

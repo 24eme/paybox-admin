@@ -2,6 +2,7 @@
 
 
 use Interop\Container\ContainerInterface;
+use Slim\Exception\NotFoundException;
 
 abstract class BaseController
 {
@@ -22,8 +23,8 @@ abstract class BaseController
         if ($request->isXhr()) {
             return $response->withJson(['message' => $message], 404);
         } else {
-            $response = $response->withStatus(404);
-            return $this->container->get('renderer')->render($response, '404.phtml', ['message' => $message]);
+            $request = $request->withAttribute('404Message', $message);
+            throw new NotFoundException($request, $response);
         }
     }
 }
