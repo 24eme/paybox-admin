@@ -16,7 +16,7 @@ class ProduitController extends BaseController
         $produit = $mapper->getProduit($args['id']);
 
         if ($produit === false) {
-            return parent::throw404($request, $response, 'Pas de produit trouvé.');
+            return parent::throw404($request, $response, 'Produit introuvable.');
         }
 
         $messages = $this->container->get('flash')->getMessage('Update');
@@ -31,7 +31,7 @@ class ProduitController extends BaseController
         $produit = $mapper->getProduit($args['id']);
 
         if ($produit === false) {
-            return parent::throw404($request, $response, 'Pas de produit trouvé.');
+            return parent::throw404($request, $response, 'Produit introuvable.');
         }
 
         // Status par défaut
@@ -129,7 +129,7 @@ class ProduitController extends BaseController
         $produit = $mapper->getProduit($args['id']);
 
         if ($produit === false) {
-            return parent::throw404($request, $response, 'Pas de produit trouvé.');
+            return parent::throw404($request, $response, 'Produit introuvable.');
         }
 
         $format = $request->getQueryParam('format', 'csv');
