@@ -17,6 +17,7 @@ return [
 
         // Database settings
         'database' => [
+            'driver' => getenv('DB_DRIVER'),
             'host' => getenv('DB_HOST'),
             'user' => getenv('DB_USER'),
             'pass' => getenv('DB_PASS'),

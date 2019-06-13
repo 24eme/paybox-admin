@@ -21,7 +21,17 @@ $container['logger'] = function ($c) {
 // database
 $container['database'] = function ($c) {
     $settings = $c->get('settings')['database'];
-    $db = new PDO('mysql:host=' . $settings['host'] . ';dbname=' . $settings['base'] . ';charset=UTF8', $settings['user'], $settings['pass']);
+    if ($settings['driver'] === 'sqlite') {
+        $db = new PDO($settings['driver'] . ':' . $settings['base']);
+    } else {
+        $db = new PDO($settings['driver']
+            . ':host=' . $settings['host']
+            . ';dbname=' . $settings['base']
+            . ';charset=UTF8',
+            $settings['user'],
+            $settings['pass']
+        );
+    }
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
