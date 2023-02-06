@@ -36,7 +36,7 @@ abstract class Mapper
             return $stmt->fetchColumn();
         } else {
             // Erreur de requête
-            parent::logError('Erreur dans la requête: '
+            self::logError('Erreur dans la requête: '
                 . PHP_EOL
                 . print_r($this->db->errorInfo(), true),
                 'alert');
