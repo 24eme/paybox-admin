@@ -39,7 +39,7 @@ class ReferenceMapper extends Mapper
 
     public function getPaiements()
     {
-        $sql = "SELECT y_status, p_montant, y_date
+        $sql = "SELECT y_status, y_montant, y_date
             FROM v_paiement_effectue
             WHERE y_reference = " . $this->reference
             . " ORDER BY y_date";
