@@ -2,7 +2,7 @@
 // Routes
 
 $app->get('/', function ($request, $response, $args) {
-    return $this->renderer->render($response, 'index.phtml');
+    return $this->get('renderer')->render($response, 'index.phtml');
 })->setName('index');
 
 /* Plus utilisé
@@ -21,11 +21,11 @@ $app->get('/produit/', function ($request, $response, $args) {
 $app->get('/produit/new', ProduitController::class . ':formCreateProduct')->setName('form-create-produit');
 $app->post('/produit/new', ProduitController::class . ':createProduct')->setName('create-produit');
 
-$app->group('/produit/{id:[0-9]+}', function () {
-    $this->get('', ProduitController::class . ':getProduct')->setName('produit-id');
-    $this->post('/edit', ProduitController::class . ':updateProduct')->setName('set-produit-id');
-    $this->get('/paiements', ProduitController::class . ':getPaiements')->setName('paiements');
-    $this->get('/paiements/export', ProduitController::class . ':export')->setName('export');
+$app->group('/produit/{id:[0-9]+}', function (\Slim\Routing\RouteCollectorProxy $app) {
+    $app->get('', ProduitController::class . ':getProduct')->setName('produit-id');
+    $app->post('/edit', ProduitController::class . ':updateProduct')->setName('set-produit-id');
+    $app->get('/paiements', ProduitController::class . ':getPaiements')->setName('paiements');
+    $app->get('/paiements/export', ProduitController::class . ':export')->setName('export');
 });
 
 $app->get('/user/{id:[0-9]+}', ClientController::class . ':getUser')->setName('user-id');
