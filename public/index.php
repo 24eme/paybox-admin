@@ -20,7 +20,7 @@ spl_autoload_register(function ($classname) {
 session_start();
 
 // Load Env variables
-$dotenv = new Dotenv(__DIR__.'/../');
+$dotenv = Dotenv::createImmutable(__DIR__.'/../');
 $dotenv->load();
 
 // Instantiate the app
