@@ -17,13 +17,13 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
-    "slim/slim": "^3.1",
-    "slim/php-view": "^2.0",
-    "monolog/monolog": "^1.17",
-    "tuupola/slim-basic-auth": "3.x-dev",
-    "vlucas/phpdotenv": "^2.4",
-    "slim/flash": "^0.2.0",
-    "beberlei/assert": "^2.7"
+    "slim/slim": "^4.11",
+    "slim/php-view": "^3.2",
+    "monolog/monolog": "^3.0",
+    "tuupola/slim-basic-auth": "^3.3",
+    "vlucas/phpdotenv": "^5.5",
+    "slim/flash": "^0.4.0",
+    "beberlei/assert": "^3.3",
+    "laminas/laminas-diactoros": "^2.25"
   }
 }
