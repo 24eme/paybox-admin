@@ -4,6 +4,11 @@ use Psr\Container\ContainerInterface;
 
 $container = $app->getContainer();
 
+// load settings
+$container->set('settings', function (ContainerInterface $c) {
+    return require __DIR__.'/settings.php';
+});
+
 // view renderer
 $container->set('renderer', function (ContainerInterface $c) {
     $settings = $c->get('settings')['renderer'];
