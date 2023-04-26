@@ -11,11 +11,11 @@ use Tuupola\Middleware\HttpBasicAuthentication;
 
 $app->addRoutingMiddleware();
 
-//$app->add(new HttpBasicAuthentication([
-//    "users" => [
-//        $_ENV["ADMIN_USER"] => $_ENV["ADMIN_PASSWORD"]
-//    ]
-//]));
+$app->add(new HttpBasicAuthentication([
+    "users" => [
+        $_ENV["ADMIN_USER"] => $_ENV["ADMIN_PASSWORD"]
+    ]
+]));
 
 $errorMiddleware = $app->addErrorMiddleware((bool) $_ENV['DISPLAY_ERRORS'], true, true);
 
