@@ -2,6 +2,8 @@
 
 namespace App\Mappers;
 
+use PDO;
+
 class PaiementMapper extends Mapper
 {
     public function getPaiements($produit = null, $status = 'EFFECTUE')

@@ -2,6 +2,7 @@
 
 namespace App\Mappers;
 
+use PDOStatement;
 use Monolog\Logger;
 
 abstract class Mapper

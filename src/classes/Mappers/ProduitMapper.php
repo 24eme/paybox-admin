@@ -2,6 +2,8 @@
 
 namespace App\Mappers;
 
+use PDO;
+
 class ProduitMapper extends Mapper
 {
     public function getProduit($id)

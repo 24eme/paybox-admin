@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Mappers\ProduitMapper;
 use App\Mappers\PaiementMapper;
+use Assert\LazyAssertionException;
 
 class ProduitController extends BaseController
 {
@@ -96,7 +97,7 @@ class ProduitController extends BaseController
             $new = $mapper->create($form);
 
             return $response->withStatus(302)->withHeader('Location', '/produit/'.$new);
-        } catch (Assert\LazyAssertionException $e) {
+        } catch (LazyAssertionException $e) {
             $message = $e->getMessage();
             $this->container->get('flash')->addMessage('Create', [$success, $message]);
         }
