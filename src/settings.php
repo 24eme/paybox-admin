@@ -13,10 +13,10 @@ return [
 
     // Database settings
     'database' => [
-        'driver' => getenv('DB_DRIVER'),
-        'host' => getenv('DB_HOST'),
-        'user' => getenv('DB_USER'),
-        'pass' => getenv('DB_PASS'),
-        'base' => getenv('DB_BASE')
+        'driver' => $_ENV['DB_DRIVER'],
+        'host' => $_ENV['DB_HOST'],
+        'user' => $_ENV['DB_USER'],
+        'pass' => $_ENV['DB_PASS'],
+        'base' => $_ENV['DB_BASE']
     ],
 ];

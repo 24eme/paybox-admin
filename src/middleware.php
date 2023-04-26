@@ -13,11 +13,11 @@ $app->addRoutingMiddleware();
 
 //$app->add(new HttpBasicAuthentication([
 //    "users" => [
-//        getenv("ADMIN_USER") => getenv("ADMIN_PASSWORD")
+//        $_ENV["ADMIN_USER"] => $_ENV["ADMIN_PASSWORD"]
 //    ]
 //]));
 
-$errorMiddleware = $app->addErrorMiddleware((bool) getenv('DISPLAY_ERRORS'), true, true);
+$errorMiddleware = $app->addErrorMiddleware((bool) $_ENV['DISPLAY_ERRORS'], true, true);
 
 // Set the Not Found Handler
 $errorMiddleware->setErrorHandler(
