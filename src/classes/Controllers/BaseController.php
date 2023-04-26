@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Psr\Container\ContainerInterface;
-use Slim\Exception\NotFoundException;
+use Slim\Exception\HttpNotFoundException;
 
 abstract class BaseController
 {
@@ -21,11 +21,11 @@ abstract class BaseController
 
     public function throw404($request, $response, $message = '')
     {
-        if ($request->isXhr()) {
+        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest') {
             return $response->withJson(['message' => $message], 404);
         } else {
             $request = $request->withAttribute('404Message', $message);
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
     }
 }
