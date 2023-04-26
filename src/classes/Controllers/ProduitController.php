@@ -6,6 +6,7 @@ use App\Mappers\ProduitMapper;
 use App\Mappers\PaiementMapper;
 use Assert\LazyAssertionException;
 use Slim\Routing\RouteContext;
+use Laminas\Diactoros\Stream;
 
 class ProduitController extends BaseController
 {
@@ -140,8 +141,8 @@ class ProduitController extends BaseController
             return parent::throw404($request, $response, 'Produit introuvable.');
         }
 
-        $format = $request->getQueryParam('format', 'csv');
-        $status = $request->getQueryParam('status', 'EFFECTUE');
+        $format = (array_key_exists('format', $request->getQueryParams())) ? $request->getQueryParams()['format'] : 'csv';
+        $status = (array_key_exists('status', $request->getQueryParams())) ? $request->getQueryParams()['status'] : 'EFFECTUE';
 
         //$promo = $args['promo'];
 
@@ -152,15 +153,15 @@ class ProduitController extends BaseController
         $response = $response->withHeader('Content-Disposition',
             'attachment; filename=' . $args['id'] . '-' . $status . '-' . date('Y-m-d') . '.csv');
 
-        $output = fopen('php://output', 'w');
+        $output = fopen('php://memory', 'w+');
         $csvheader = ['nom', 'prenom', 'email', 'libelleproduit', 'montant', 'status', 'date', 'reference'];
         fputcsv($output, $csvheader, ';');
 
         foreach ($paiements as $paiement) {
             fputcsv($output, $paiement, ';');
         }
-        fclose($output);
+        rewind($output);
 
-        return $response;
+        return $response->withBody(new Stream($output));
     }
 }
