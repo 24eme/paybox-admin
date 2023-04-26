@@ -1,4 +1,7 @@
 <?php
+
+use App\Controllers\{ProduitController, ClientController, ReferenceController};
+
 // Routes
 
 $app->get('/', function ($request, $response, $args) {

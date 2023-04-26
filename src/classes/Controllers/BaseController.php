@@ -1,7 +1,8 @@
 <?php
 
+namespace App\Controllers;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
 
 abstract class BaseController

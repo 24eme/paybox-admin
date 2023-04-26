@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Mappers;
 
 class ClientMapper extends Mapper
 {

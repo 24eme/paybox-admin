@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Mappers\ProduitMapper;
+use App\Mappers\PaiementMapper;
+
 class ProduitController extends BaseController
 {
     public function getAll($request, $response, $args)

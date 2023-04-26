@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Mappers;
+
 class ReferenceMapper extends Mapper
 {
     protected $reference;

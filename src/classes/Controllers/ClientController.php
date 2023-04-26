@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Mappers\ClientMapper;
 
 class ClientController extends BaseController
 {

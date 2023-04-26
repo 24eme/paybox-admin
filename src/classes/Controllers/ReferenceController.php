@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Mappers\ReferenceMapper;
+
 class ReferenceController extends BaseController
 {
     public function getReference($request, $response, $args)
