@@ -1,7 +1,7 @@
     <h2 class="subtitle">Nombre de paiements : <?= count($users) ?></h2>
 
     <p>
-        🔙 Retourner au <a href="<?= $router->pathFor('produit-id', ['id' => $produit]) ?>">produit</a>.
+        🔙 Retourner au <a href="<?= $router->urlFor('produit-id', ['id' => $produit]) ?>">produit</a>.
     </p>
 
     <?php if (empty($users)): ?>
@@ -32,7 +32,7 @@
     </div>
     <div class="content">
         <p><a class="button is-primary is-outlined"
-              href="<?= $router->pathFor('export', ['id' => $produit]) ?>?status=<?= $status ?> ">
+              href="<?= $router->urlFor('export', ['id' => $produit]) ?>?status=<?= $status ?> ">
               💾 Export CSV
             </a>
         </p>

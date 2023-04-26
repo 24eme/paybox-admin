@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Mappers\ProduitMapper;
 use App\Mappers\PaiementMapper;
 use Assert\LazyAssertionException;
+use Slim\Routing\RouteContext;
 
 class ProduitController extends BaseController
 {
@@ -41,14 +42,14 @@ class ProduitController extends BaseController
         }
 
         // Status par défaut
-        $status = $request->getQueryParam('status', 'EFFECTUE');
+        $status = (array_key_exists('status', $request->getQueryParams())) ? $request->getQueryParams()['status'] : 'EFFECTUE';
 
         // On récupère les paiements
         $mapper = new PaiementMapper($this->container->get('database'), $this->container->get('logger'));
         $users = $mapper->getPaiements($args['id'], $status);
         $statuses = $mapper->getStatuses();
 
-        if ($request->isXhr()) {
+        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest') {
             $data = [
                 'produit' => $args['id'],
                 'status' => $status,
@@ -57,8 +58,9 @@ class ProduitController extends BaseController
             ];
             return $response->withJson($data);
         } else {
+            $routeParser = RouteContext::fromRequest($request)->getRouteParser();
             $returnedData = [
-                'router' => $this->container->get('router'),
+                'router' => $routeParser,
                 'produit' => $args['id'],
                 'status' => $status,
                 'statuses' => $statuses,
