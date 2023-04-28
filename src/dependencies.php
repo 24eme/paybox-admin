@@ -31,6 +31,13 @@ $container->set('database', function (ContainerInterface $c) {
     $settings = $c->get('settings')['database'];
     if ($settings['driver'] === 'sqlite') {
         $db = new PDO($settings['driver'] . ':' . $settings['base']);
+    } elseif ($settings['driver'] === 'pgsql') {
+        $db = new PDO($settings['driver']
+            . ':host=' . $settings['host']
+            . ';dbname=' . $settings['base'],
+            $settings['user'],
+            $settings['pass']
+        );
     } else {
         $db = new PDO($settings['driver']
             . ':host=' . $settings['host']
